@@ -1,13 +1,14 @@
 library(shiny)
 library(shinydashboard)
 library(rintrojs)
+library(here)
 filter <- get("filter", asNamespace("dplyr"))
 select <- get("select", asNamespace("dplyr"))
 
 "%>%" <- magrittr::"%>%"
-source("R/logical_condition.R")
+source(here::here("R/logical_condition.R"))
 
-intro <- readr::read_csv2("intro.csv",
+intro <- readr::read_csv2(here::here("intro.csv"),
                           locale = readr::locale(encoding = "latin1"))
 
 df <- ggplot2::mpg
@@ -26,7 +27,7 @@ ui <- shinydashboard::dashboardPage(
     title = div(
       span(
         img(
-          src = knitr::image_uri("www/logo_tidywizard.png"),
+          src = knitr::image_uri(here::here("www/logo_tidywizard.png")),
           width = "22%"
         ),
         "tidywizard"
@@ -141,7 +142,7 @@ server <- function(input, output, session){
     showModal(modalDialog(
       # includeHTML("../intro_text.html"),
       HTML(paste0(htmltools::div(style = 'position:relative;',
-                                 img(src = knitr::image_uri("www/logo_tidywizard.png"),
+                                 img(src = knitr::image_uri(here::here("www/logo_tidywizard.png")),
                                      style = 'display: block; margin-left: auto; margin-right: auto;',
                                      width = "30%")),
                   HTML('<h1 style="text-align: center;">Seja bem-vindo ao&nbsp;<code><strong>tidywizard</strong></code></h1>
